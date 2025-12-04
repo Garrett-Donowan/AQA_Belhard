@@ -20,11 +20,11 @@ public class MouseOverPage extends BasePage{
 
     public static void doubleClick(int clickCount){
         for(int i = 0; i < clickCount; i++) {
-            actions.doubleClick(driver.findElement(clickMeButton));
+            actions.doubleClick(driver.findElement(clickMeButton)).perform();
         }
     }
 
-    public String getClickMeAttribute(String attruibuteName) {
+    public String  getClickMeAttribute(String attruibuteName) {
         return driver.findElement(clickMeButton).getAttribute(attruibuteName);
     }
 

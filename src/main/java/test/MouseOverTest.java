@@ -1,18 +1,27 @@
 package test;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
-import java.io.IOException;
+
 
 
 public class MouseOverTest extends BaseTest{
 
     @Test
-    public void mouseTest() throws IOException {
-        getWebDriver().get(getProperties("baseURL"));
+    public void mouseTest() {
         HomePage.redirectToSection("Mouse Over");
+
+        String titleBefore = mouseOverPage.getClickMeAttribute("title");
         MouseOverPage.hoverClickMeButton();
-        MouseOverPage.doubleClick(1);
+        String titleAfter = mouseOverPage.getClickMeAttribute("title");
+
+        Assert.assertNotEquals(titleAfter, titleBefore);
+        final int clickCount = 1;
+
+
+        MouseOverPage.doubleClick(clickCount);
+        Assert.assertTrue(Integer.valueOf(mouseOverPage.getClickCount()) == clickCount*2);
 
     }
 }

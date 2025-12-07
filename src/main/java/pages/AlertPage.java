@@ -6,10 +6,15 @@ import org.openqa.selenium.interactions.Actions;
 
 public class AlertPage extends BasePage{
 
-    By promptButton = By.id("promptButton");
+    private static By promptButton = By.xpath("//button[@id='promptButton']");
+    private static By confirmButton = By.xpath("//button[@id='confirmButton']");
 
     public void clickPromptButton(){
         driver.findElement(promptButton).click();
+    }
+
+    public void clickConfirmButton(){
+        driver.findElement(confirmButton).click();
     }
 
     public void confirmAlert(){

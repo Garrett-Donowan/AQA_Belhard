@@ -8,7 +8,7 @@ public class MouseOverPage extends BasePage{
 
     private static By clickMeButton = By.xpath("//a[text()='Click me']");
     // private By clickMeCounter = By.xpath("//a[text()='Link Button'");
-    private By clickCounterunter = By.xpath("//span[@id='clickCount']");
+    private static By clickCounterunter = By.xpath("//span[@id='clickCount']");
 
     public static void hoverClickMeButton() {
         actions.moveToElement(driver.findElement(clickMeButton)).perform();

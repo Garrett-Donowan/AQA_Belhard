@@ -19,6 +19,7 @@ public abstract class BaseTest {
     protected MouseOverPage mouseOverPage = new MouseOverPage(getWebDriver(), getActions());
     protected Properties runProperties;
     protected AlertPage alertPage = new AlertPage(getWebDriver(), getActions());
+    protected TextInputPage textInputPage = new TextInputPage(getWebDriver(), getActions());
 
     private static WebDriver driver;
     private static Actions actions;

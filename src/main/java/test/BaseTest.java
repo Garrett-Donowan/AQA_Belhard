@@ -24,9 +24,9 @@ public abstract class BaseTest {
     private static WebDriver driver;
     private static Actions actions;
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
-        driver.quit();
+        driver.close();
     }
 
     @BeforeClass

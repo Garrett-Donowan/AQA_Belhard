@@ -14,7 +14,7 @@ public class DynamicPageTest extends BaseTest{
     public void testDynamicPage() {
         HomePage.redirectToSection("Dynamic Table");
 
-        String expetedValue = dynamicPage.getCpuText();
+        String expectedValue = dynamicPage.getCpuText();
 
         List<WebElement> actualHeaders = dynamicPage.getheader();
 
@@ -25,8 +25,11 @@ public class DynamicPageTest extends BaseTest{
             }
         }
 
-        String tableValue = dynamicPage.getChromeRow().findElements(By.xpath("./span")).get(cpu).getText();
-        Assert.assertEquals(expetedValue.split(" ")[2], tableValue);
+        String tableValue = dynamicPage.getChromeRow()
+                .findElements(By.xpath("./span"))
+                .get(cpu)
+                .getText();
+        Assert.assertEquals(expectedValue.split(" ")[2], tableValue);
 
 
     }

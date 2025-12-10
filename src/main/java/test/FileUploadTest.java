@@ -11,13 +11,13 @@ public class FileUploadTest extends BaseTest{
 
     @Test
     public void testFileUpload() {
-        String dirPath = "D:\\Work\\GitHub\\QA_Belhard\\AQA_Belhard\\src\\main\\java\\resources";
+        String dirPath = "src\\main\\java\\resources";
 
         HomePage.redirectToSection("File Upload");
         fileUploadPage.switchToFrame();
-        List<String> actualLoadingFiles = fileUploadPage.uploadFileNames(dirPath);
-        Assert.assertEqualsNoOrder(fileUploadPage.expectedFileNames(), actualLoadingFiles);
+        List<String> actualLoadingFiles = fileUploadPage.uploadFilesGetNames(dirPath);
+        List<String> expectedFileNames = fileUploadPage.expectedFileNames();
+        Assert.assertEqualsNoOrder(expectedFileNames, actualLoadingFiles);
         fileUploadPage.switchToDefaultContent();
-
     }
 }

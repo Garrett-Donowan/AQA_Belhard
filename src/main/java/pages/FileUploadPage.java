@@ -1,23 +1,21 @@
 package pages;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.InvalidArgumentException;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class FileUploadPage extends BasePage{
 
-    private static By uploadInput = By.xpath("//input[@id='browse']");
-    private static By lastInputFiles = By.xpath("//div[@class='file-list__container']");
+    private static  SelenideElement uploadInput = $x("//input[@id='browse']");
+    private static  SelenideElement lastInputFiles = $x("//div[@class='file-list__container']");
 
     public List<String> expectedFileNames(){
         List<String> expectedFileNames = new ArrayList<>();
         try {
-            for (String el: driver.findElement(lastInputFiles).getText().split("\n")){
+            for (String el: lastInputFiles.getText().split("\n")){
                 expectedFileNames.add(el);
             }
             return expectedFileNames;
@@ -28,15 +26,11 @@ public class FileUploadPage extends BasePage{
     }
 
     public void switchToFrame(){
-        driver.switchTo().frame(0);
+        Selenide.switchTo().frame(0);
     }
 
     public void switchToDefaultContent(){
-        driver.switchTo().defaultContent();
-    }
-
-    public FileUploadPage(WebDriver driver, Actions actions){
-        super(driver, actions);
+        Selenide.switchTo().defaultContent();
     }
 
     public List<String> uploadFilesGetNames(String dirPath){
@@ -52,7 +46,7 @@ public class FileUploadPage extends BasePage{
         }
         try {
             String combinedInput = String.join("\n", filePaths);
-            driver.findElement(uploadInput).sendKeys(combinedInput);
+            uploadInput.sendKeys(combinedInput);
             return uploadingFileNames;
         } catch (InvalidArgumentException e) {
             System.out.println("Отсутствуют файлы для загрузки в директории " + dirPath);

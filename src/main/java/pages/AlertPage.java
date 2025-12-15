@@ -1,40 +1,36 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class AlertPage extends BasePage{
 
-    private static By promptButton = By.xpath("//button[@id='promptButton']");
-    private static By confirmButton = By.xpath("//button[@id='confirmButton']");
+    private static SelenideElement promptButton = $x("//button[@id='promptButton']");
+    private static SelenideElement confirmButton = $x("//button[@id='confirmButton']");
 
     public void clickPromptButton(){
-        driver.findElement(promptButton).click();
+        promptButton.click();
     }
-
     public void clickConfirmButton(){
-        driver.findElement(confirmButton).click();
+        confirmButton.click();
     }
 
     public void confirmAlert(){
-        driver.switchTo().alert().accept();
+        Selenide.switchTo().alert().accept();
     }
 
     public void dismissAlert(){
-        driver.switchTo().alert().dismiss();
+        Selenide.switchTo().alert().dismiss();
     }
 
     public String getTextAlert(){
-        return driver.switchTo().alert().getText();
+        return Selenide.switchTo().alert().getText();
     }
 
     public void setTextAlert(String text){
-        driver.switchTo().alert().sendKeys(text);
+        Selenide.switchTo().alert().sendKeys(text);
     }
 
-    public AlertPage(WebDriver driver, Actions actions) {
-        super(driver, actions);
-    }
 
 }

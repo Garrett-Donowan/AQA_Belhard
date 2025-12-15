@@ -3,8 +3,6 @@ package test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
-
-import java.io.File;
 import java.util.List;
 
 public class FileUploadTest extends BaseTest{

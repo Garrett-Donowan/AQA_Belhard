@@ -1,34 +1,29 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
+import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class MouseOverPage extends BasePage{
 
-    private static By clickMeButton = By.xpath("//a[text()='Click me']");
-    // private By clickMeCounter = By.xpath("//a[text()='Link Button'");
-    private static By clickCounterunter = By.xpath("//span[@id='clickCount']");
+    private static SelenideElement clickMeButton = $x("//a[text()='Click me']");
+//    private static SelenideElement clickMeCounter = $x("//a[text()='Link Button'");
+    private static SelenideElement clickCounterunter = $x("//span[@id='clickCount']");
 
     public static void hoverClickMeButton() {
-        actions.moveToElement(driver.findElement(clickMeButton)).perform();
+        clickMeButton.hover();
     }
 
     public String getClickCount() {
-        return driver.findElement(clickCounterunter).getText();
+        return clickCounterunter.getText();
     }
 
     public static void doubleClick(int clickCount){
         for(int i = 0; i < clickCount; i++) {
-            actions.doubleClick(driver.findElement(clickMeButton)).perform();
+            clickMeButton.doubleClick();
         }
     }
 
-    public String  getClickMeAttribute(String attruibuteName) {
-        return driver.findElement(clickMeButton).getAttribute(attruibuteName);
-    }
-
-    public MouseOverPage(WebDriver driver, Actions actions){
-        super(driver, actions);
+    public String  getClickMeAttribute(String attributeName) {
+        return clickMeButton.getAttribute(attributeName);
     }
 }

@@ -1,9 +1,7 @@
 package test;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import org.testng.annotations.*;
 import pages.*;
 import java.io.FileInputStream;
@@ -13,54 +11,56 @@ import java.util.Properties;
 
 public abstract class BaseTest {
 
-    protected HomePage homePage = new HomePage(getWebDriver(), getActions());
-    protected MouseOverPage mouseOverPage = new MouseOverPage(getWebDriver(), getActions());
     protected Properties runProperties;
-    protected AlertPage alertPage = new AlertPage(getWebDriver(), getActions());
-    protected TextInputPage textInputPage = new TextInputPage(getWebDriver(), getActions());
-    protected FileUploadPage fileUploadPage = new FileUploadPage(getWebDriver(), getActions());
-    protected DynamicPage dynamicPage = new DynamicPage(getWebDriver(), getActions());
+    protected HomePage homePage = new HomePage();
+    protected MouseOverPage mouseOverPage = new MouseOverPage();
+    protected AlertPage alertPage = new AlertPage();
+    protected TextInputPage textInputPage = new TextInputPage();
+    protected FileUploadPage fileUploadPage = new FileUploadPage();
+    protected DynamicPage dynamicPage = new DynamicPage();
+    protected DynamicIdPage dynamicIdPage = new DynamicIdPage();
 
 
-    private static WebDriver driver;
-    private static Actions actions;
 
-    @AfterSuite(alwaysRun = true)
-    public void closeBrowser(){
-        driver.quit();
-        driver = null;
-    }
-
-    @BeforeClass
-    public void openBasePage(){
-        try {
-            setProperties();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        getWebDriver().get(runProperties.getProperty("baseURL"));
-    }
-
-
-    public static WebDriver getWebDriver() {
-        if (driver == null) {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
-            driver.manage().window().maximize();
-            return driver;
-        } else {
-            return driver;
-        }
-    }
-
-    public static Actions getActions() {
-        if (actions == null) {
-            return new Actions(getWebDriver());
-        } else {
-            return actions;
-
-        }
-    }
+//    private static WebDriver driver;
+//    private static Actions actions;
+//
+//    @AfterSuite(alwaysRun = true)
+//    public void closeBrowser(){
+//        driver.quit();
+//        driver = null;
+//    }
+//
+//    @BeforeClass
+//    public void openBasePage(){
+//        try {
+//            setProperties();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        getWebDriver().get(runProperties.getProperty("baseURL"));
+//    }
+//
+//
+//    public static WebDriver getWebDriver() {
+//        if (driver == null) {
+//            WebDriverManager.chromedriver().setup();
+//            driver = new ChromeDriver();
+//            driver.manage().window().maximize();
+//            return driver;
+//        } else {
+//            return driver;
+//        }
+//    }
+//
+//    public static Actions getActions() {
+//        if (actions == null) {
+//            return new Actions(getWebDriver());
+//        } else {
+//            return actions;
+//
+//        }
+//    }
 
     @BeforeTest
     public void setProperties() throws IOException {
@@ -71,8 +71,8 @@ public abstract class BaseTest {
     }
 
     public void switchToLastOpenTab(){
-        List<String> openedWindows = driver.getWindowHandles().stream().toList();
-        driver.switchTo().window(openedWindows.get(openedWindows.size()-1));
+        List<String> openedWindows = WebDriverRunner.getWebDriver().getWindowHandles().stream().toList();
+        Selenide.switchTo().window(openedWindows.get(openedWindows.size()-1));
     }
 }
 

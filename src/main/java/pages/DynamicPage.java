@@ -1,32 +1,26 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-
-import java.util.List;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class DynamicPage extends BasePage{
 
-    private By cpuValue = By.xpath("//p[@class='bg-warning']");
-    private By columnheaders = By.xpath("//span[@role='columnheader']");
-    private By chromeRow = By.xpath("//span[text()='Chrome']/..");
+    private static SelenideElement cpuValue = $x("//p[@class='bg-warning']");
+    private static ElementsCollection columnheaders = $$x("//span[@role='columnheader']");
+    private static SelenideElement chromeRow = $x("//span[text()='Chrome']/..");
 
     public String getCpuText(){
-        return driver.findElement(cpuValue).getText();
+        return cpuValue.getText();
     }
 
-    public List<WebElement> getheader(){
-        return driver.findElements(columnheaders);
+    public ElementsCollection getheader(){
+        return columnheaders;
     }
 
-    public WebElement getChromeRow(){
-        return driver.findElement(chromeRow);
+    public SelenideElement getChromeRow(){
+        return chromeRow;
     }
 
-
-    public DynamicPage(WebDriver driver, Actions actions){
-        super(driver, actions);
-    }
 }

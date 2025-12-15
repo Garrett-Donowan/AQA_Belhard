@@ -1,12 +1,11 @@
 package test;
 
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 
-import java.util.List;
 
 public class DynamicPageTest extends BaseTest{
 
@@ -16,12 +15,14 @@ public class DynamicPageTest extends BaseTest{
 
         String expectedValue = dynamicPage.getCpuText();
 
-        List<WebElement> actualHeaders = dynamicPage.getheader();
+        ElementsCollection actualHeaders = dynamicPage.getheader();
 
         int cpu = 0;
-        for (WebElement el : actualHeaders) {
-            if (el.getText().equals("CPU")) {
-                cpu = actualHeaders.indexOf(el);
+        for (int i = 0; i < actualHeaders.size(); i++) {
+            String header = actualHeaders.get(i).getText();
+            if (header.equals("CPU")) {
+                cpu = i;
+                break;
             }
         }
 

@@ -9,8 +9,8 @@ public class DynamicIdTest extends BaseTest {
 
     @Test
     public void testPageId(){
-        HomePage.redirectToSection("Dynamic ID");
 
+        HomePage.redirectToSection("Dynamic ID");
         dynamicIdPage.dynamicIdButton.click();
         System.out.println("test");
     }

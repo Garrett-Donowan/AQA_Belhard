@@ -9,7 +9,7 @@ public class HomePage extends BasePage{
 
     public static void redirectToSection(String sectionName) {
         $x(LINK_LOCATOR_PATTERN.formatted(sectionName)).click();
-        System.out.println((LINK_LOCATOR_PATTERN.formatted(sectionName)));
     }
 
     }
+}

@@ -9,11 +9,8 @@ import pages.HomePage;
 
 public class MultipleWindowsTest extends BaseTest{
 
-    WebDriver driver = WebDriverRunner.getWebDriver();
-
     @Test
     public void testMultipleWindows() {
-        String playHandles = driver.getWindowHandle();
 
         HomePage.redirectToSection("File Upload");
         Selenide.switchTo().newWindow(WindowType.TAB);

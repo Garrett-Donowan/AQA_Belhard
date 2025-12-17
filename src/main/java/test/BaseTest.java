@@ -1,6 +1,7 @@
 package test;
 
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Allure;
 import listeners.TestListener;
 import org.openqa.selenium.OutputType;
@@ -25,6 +26,7 @@ public abstract class BaseTest {
     protected FileUploadPage fileUploadPage = new FileUploadPage();
     protected DynamicPage dynamicPage = new DynamicPage();
     protected DynamicIdPage dynamicIdPage = new DynamicIdPage();
+    protected AjaxPage ajaxPage = new AjaxPage();
 
     @BeforeClass
     public void openBasePage(){
@@ -34,6 +36,7 @@ public abstract class BaseTest {
             e.printStackTrace();
         }
         Selenide.open(runProperties.getProperty("baseURL"));
+        WebDriverRunner.getWebDriver().manage().window().maximize();
     }
 
     @BeforeTest

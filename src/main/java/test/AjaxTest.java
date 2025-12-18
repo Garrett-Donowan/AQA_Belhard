@@ -1,6 +1,5 @@
 package test;
 
-
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Epic;
@@ -8,7 +7,6 @@ import jdk.jfr.Description;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
 import java.time.Duration;
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class AjaxTest extends BaseTest{
     @Test
     @Description("Проверка обработки Ajax запросов")
     @Epic("AUTOTEST")
-    public void ajaxTest(){
+    public void testAjax(){
 
         homePage.redirectToSection("AJAX Data");
 

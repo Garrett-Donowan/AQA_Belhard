@@ -3,12 +3,12 @@ package test;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Allure;
-//import listeners.TestListener;
+import listeners.TestListener;
 import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 import pages.*;
-
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Properties;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-//@Listeners(TestListener.class)
+@Listeners(TestListener.class)
 public abstract class BaseTest {
     protected Properties runProperties;
 
@@ -29,6 +29,8 @@ public abstract class BaseTest {
     protected DynamicIdPage dynamicIdPage = new DynamicIdPage();
     protected AjaxPage ajaxPage = new AjaxPage();
     protected HiddenLayersPage hiddenLayersPage = new HiddenLayersPage();
+    protected SampleAppPage sampleAppPage = new SampleAppPage();
+
 
     @BeforeClass
     @Step("Открыть страницу BasePage")
@@ -41,6 +43,7 @@ public abstract class BaseTest {
         Selenide.open(runProperties.getProperty("baseURL"));
         WebDriverRunner.getWebDriver().manage().window().maximize();
     }
+
 
     @BeforeTest
     @Step("Получить адрес страницы BasePage")

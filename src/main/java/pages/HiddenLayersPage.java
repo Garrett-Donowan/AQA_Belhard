@@ -5,8 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -36,16 +34,16 @@ public class HiddenLayersPage extends BasePage {
         return buttons;
     }
 
-    @Step("Возвращает z-index GreenButton, если кнопка существует")
+    @Step("Возвращает z-index GreenButton из списка кнопок, если кнопка существует")
     public int greenButtonexists(HashMap<String, String> order) {
-        if (order.containsKey(greenButton.name())) {
-            return Integer.parseInt(order.get(greenButton.getAttribute("id")));
-        } else {
-            return -1;
+        int buttonOrder = -1;
+            if (order.containsKey(greenButton.name())) {
+                buttonOrder = Integer.parseInt(order.get(greenButton.getAttribute("id")));
+            }
+        return buttonOrder;
         }
-    }
 
-    @Step("Возвращает z-index BlueButton кнопки, если кнопка существует")
+    @Step("Возвращает z-index BlueButton кнопки из списка кнопок, если кнопка существует")
     public int anotherButtonExist(HashMap<String, String> order) {
         int buttonOrder = -1;
         for (Map.Entry<String, String> el : order.entrySet()) {

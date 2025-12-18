@@ -12,8 +12,6 @@ import java.util.*;
 
 public class AlertTest extends BaseTest{
 
-
-
     @Test
     @Description("Проверка обработки Алертов")
     @Epic("AUTOTEST")

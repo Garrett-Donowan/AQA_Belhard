@@ -4,7 +4,6 @@ import io.qameta.allure.Epic;
 import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
 import java.util.List;
 
 public class FileUploadTest extends BaseTest{

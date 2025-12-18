@@ -19,10 +19,16 @@ public class HiddenLayersTest extends BaseTest{
         HashMap<String, String> initialOrder = hiddenLayersPage.getZOrder();
         hiddenLayersPage.makeGreenCkick();
         HashMap<String, String> updatedOrder = hiddenLayersPage.getZOrder();
+        try {
+            hiddenLayersPage.makeGreenCkick();
+        } catch (Throwable  e) {
+            System.out.println(e.getMessage());
+            Assert.assertTrue(e.getMessage().contains("ElementClickInterceptedException"));
+        }
         hiddenLayersPage.makeBlueClick();
         int greenButtonOrder = hiddenLayersPage.greenButtonexists(initialOrder);
         int blueButtonOrder = hiddenLayersPage.anotherButtonExist(updatedOrder);
-        Assert.assertNotEquals(blueButtonOrder, greenButtonOrder);
+        Assert.assertTrue(blueButtonOrder>greenButtonOrder);
         }
 }
 

@@ -3,7 +3,8 @@ package test;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Allure;
-import listeners.TestListener;
+//import listeners.TestListener;
+import io.qameta.allure.Step;
 import org.openqa.selenium.OutputType;
 import org.testng.annotations.*;
 import pages.*;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Properties;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
-@Listeners(TestListener.class)
+//@Listeners(TestListener.class)
 public abstract class BaseTest {
     protected Properties runProperties;
 
@@ -27,8 +28,10 @@ public abstract class BaseTest {
     protected DynamicPage dynamicPage = new DynamicPage();
     protected DynamicIdPage dynamicIdPage = new DynamicIdPage();
     protected AjaxPage ajaxPage = new AjaxPage();
+    protected HiddenLayersPage hiddenLayersPage = new HiddenLayersPage();
 
     @BeforeClass
+    @Step("Открыть страницу BasePage")
     public void openBasePage(){
         try {
             setProperties();
@@ -40,6 +43,7 @@ public abstract class BaseTest {
     }
 
     @BeforeTest
+    @Step("Получить адрес страницы BasePage")
     public void setProperties() throws IOException {
         runProperties = new Properties();
         FileInputStream fls = new FileInputStream("src/main/resources/properties.properties");
@@ -47,12 +51,14 @@ public abstract class BaseTest {
         fls.close();
     }
 
+    @Step("Переключиться на последнюю открытую вкладку")
     public void switchToLastOpenTab(){
         List<String> openedWindows = getWebDriver().getWindowHandles().stream().toList();
         Selenide.switchTo().window(openedWindows.get(openedWindows.size()-1));
     }
 
-   public static void getScreenshotes(){
+    @Step("Сделать скриншот страницы")
+    public static void getScreenshotes(){
         byte[] bytes = Selenide.screenshot(OutputType.BYTES);
         if (bytes != null){
             Allure.addAttachment("Screen", "image/png", new ByteArrayInputStream(bytes), "png");

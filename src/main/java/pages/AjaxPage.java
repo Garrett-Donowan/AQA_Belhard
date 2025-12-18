@@ -8,9 +8,9 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class AjaxPage extends BasePage{
 
-    private static final SelenideElement trigerButton = $x("//button[@id='ajaxButton']");
-    private static final SelenideElement spinnerLoading = $x("//i[@class='fa fa-spinner fa-spin']");
-    private static final ElementsCollection dataLoad = $$x("//div[@id='content']/p[@class='bg-success']");
+    private static SelenideElement trigerButton = $x("//button[@id='ajaxButton']");
+    private static SelenideElement spinnerLoading = $x("//i[@class='fa fa-spinner fa-spin']");
+    private static ElementsCollection dataLoad = $$x("//div[@id='content']/p[@class='bg-success']");
 
 
     @Step("Нажать на кнопку Button Triggering AJAX Request")

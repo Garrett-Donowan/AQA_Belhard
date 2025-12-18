@@ -1,19 +1,22 @@
 package test;
 
 import com.codeborne.selenide.ElementsCollection;
+import io.qameta.allure.Epic;
+import jdk.jfr.Description;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
 
 
 public class DynamicPageTest extends BaseTest{
 
     @Test
+    @Description("Проверка обработки элементов с динамическим расположением на странице")
+    @Epic("AUTOTEST")
     public void testDynamicPage() {
-        HomePage.redirectToSection("Dynamic Table");
+        homePage.redirectToSection("Dynamic Table");
 
-        String expectedValue = dynamicPage.getCpuText();
+        final String expectedValue = dynamicPage.getCpuText();
 
         ElementsCollection actualHeaders = dynamicPage.getheader();
 

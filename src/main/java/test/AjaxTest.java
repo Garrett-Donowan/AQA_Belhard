@@ -12,6 +12,7 @@ import pages.HomePage;
 import java.time.Duration;
 import java.util.List;
 
+
 public class AjaxTest extends BaseTest{
 
     private static final String expectedText = "Data loaded with AJAX get request.";
@@ -21,14 +22,18 @@ public class AjaxTest extends BaseTest{
     @Epic("AUTOTEST")
     public void ajaxTest(){
 
-        HomePage.redirectToSection("AJAX Data");
+        homePage.redirectToSection("AJAX Data");
 
-        ajaxPage.startAjaxJob();
-        Selenide
-                .Wait().withTimeout(Duration.ofSeconds(20))
-                .until(ExpectedConditions.invisibilityOf(ajaxPage.getSpinnerLoading()));
+        for (int i = 0; i < 2; i++) {
+            ajaxPage.startAjaxJob();
+            Selenide
+                    .Wait().withTimeout(Duration.ofSeconds(20))
+                    .until(ExpectedConditions.invisibilityOf(ajaxPage.getSpinnerLoading()));
+        }
 
         List<SelenideElement> data = ajaxPage.getDataLoad().stream().toList();
+        Assert.assertNotNull(data);
+
         if (!data.isEmpty()){
             for (SelenideElement el : data) {
                 Assert.assertEquals(el.getText(), expectedText);

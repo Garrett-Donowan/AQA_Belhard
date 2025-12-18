@@ -1,5 +1,7 @@
 package test;
 
+import io.qameta.allure.Epic;
+import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
@@ -9,8 +11,10 @@ import pages.*;
 public class MouseOverTest extends BaseTest{
 
     @Test
+    @Description("Проверка наведения указателя на элемент и проверка двойного клика")
+    @Epic("AUTOTEST")
     public void mouseTest() {
-        HomePage.redirectToSection("Mouse Over");
+        homePage.redirectToSection("Mouse Over");
 
         String titleBefore = mouseOverPage.getClickMeAttribute("title");
         MouseOverPage.hoverClickMeButton();

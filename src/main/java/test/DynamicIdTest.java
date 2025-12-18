@@ -1,17 +1,23 @@
 package test;
 
-import org.openqa.selenium.support.PageFactory;
+import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Epic;
+import jdk.jfr.Description;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.DynamicIdPage;
-import pages.HomePage;
 
 public class DynamicIdTest extends BaseTest {
 
     @Test
+    @Description("Проверка обработки элементов с динамическим ID")
+    @Epic("AUTOTEST")
     public void testPageId(){
 
-        HomePage.redirectToSection("Dynamic ID");
-        dynamicIdPage.dynamicIdButton.click();
-        System.out.println("test");
+        homePage.redirectToSection("Dynamic ID");
+        String initialID = dynamicIdPage.getID();
+        dynamicIdPage.makeClick();
+        Selenide.refresh();
+        String changedId = dynamicIdPage.getID();
+        Assert.assertNotEquals(changedId, initialID);
     }
 }
